@@ -10,7 +10,7 @@ router.post('/',async (req,res)=>{
       let existingCandidate = await Candidate.findOne({partyName,partySymbol})
 
       if(existingCandidate){
-        res.status(404).send('Candidate already exists')
+        res.status(404).json({err:'Candidate already exists'})
       }
         
         const candidate = new Candidate({
