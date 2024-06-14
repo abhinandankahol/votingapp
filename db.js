@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoDbUrl = 'mongodb://localhost:27017/votingapplication';
+const mongoDbUrl = 'mongodb://localhost:27017/votingapplication?retryWrites=true&w=majority';
 
 mongoose.connect(mongoDbUrl)
 
