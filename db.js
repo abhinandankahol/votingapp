@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
-const mongoDbUrl = 'mongodb://localhost:27017/votingapplication?retryWrites=true&w=majority';
+const mongoDbUrl = 'mongodb+srv://abhinandankahol2002:m4guMN7UbjM3hKl0@abhinandankahol.g2dclxh.mongodb.net/userinfo?retryWrites=true&w=majority'
 
-mongoose.connect(mongoDbUrl)
+mongoose.connect(mongoDbUrl,{
+    tls: true,
+     tlsAllowInvalidCertificates: false
+
+})
 
 const db = mongoose.connection;
 
