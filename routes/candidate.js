@@ -2,23 +2,19 @@ const express = require('express')
 const Candidate = require('../models/candiadateModel')
 const router = express.Router()
 
-router.post('/',async (req,res)=>{
+router.post('/', async (req, res) => {
 
     try {
-        const {name, partyName, partySymbol,age} = req.body
+        const { name, partyName, partySymbol, age } = req.body
 
-      let existingCandidate = await Candidate.findOne({partyName,partySymbol})
+        let existingCandidate = await Candidate.findOne({ partyName, partySymbol })
 
-      if(existingCandidate){
-<<<<<<< HEAD
-       return res.status(404).send('Candidate already exists')
-=======
-        res.status(404).json({err:'Candidate already exists'})
->>>>>>> 9f6fddeffd18f6ffa88bc3a3449e783fcbf892f0
-      }
-        
+        if (existingCandidate) {
+            return res.status(404).send('Candidate already exists')
+        }
+
         const candidate = new Candidate({
-            name,partyName,partySymbol,age
+            name, partyName, partySymbol, age
         })
 
         await candidate.save()
@@ -26,7 +22,7 @@ router.post('/',async (req,res)=>{
 
     } catch (error) {
         res.status(500).send('Error adding candidate');
-        
+
     }
 
 })
