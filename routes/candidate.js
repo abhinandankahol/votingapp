@@ -7,10 +7,10 @@ router.post('/', async (req, res) => {
     try {
         const { name, partyName, partySymbol, age } = req.body
 
-        let existingCandidate = await Candidate.findOne({ partyName, partySymbol })
+        let existingCandidate = await Candidate.findOne({ partyName, partySymbol ,age , name })
 
         if (existingCandidate) {
-            return(res.send('Candidate already exists'))
+            return res.status(404).send('Candidate already exists')
         
         }
 
