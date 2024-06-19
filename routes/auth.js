@@ -35,16 +35,17 @@ router.post('/', async (req, res) => {
 });
 
 
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { email, password } = req.body
 
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).send('Invalid email or password')
+            
         }
 
-        const isMatch = await user.comparePassword(password)
+        const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
             return res.status(404).send('Invalid Password')
         }
