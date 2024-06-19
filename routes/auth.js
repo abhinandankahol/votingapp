@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
         const user = new User({
             email,
             password,
-           aadharnumber,
+            aadharnumber,
             age
         });
 
@@ -34,4 +34,26 @@ router.post('/', async (req, res) => {
     }
 });
 
+
+router.post('/', async (req, res) => {
+    try {
+        const { email, password } = req.body
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).send('Invalid email or password')
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.status(404).send('Invalid Password')
+        }
+
+        res.send(200).send('Logged in success')
+
+    } catch (error) {
+        res.status(500).send('Error logging in user');
+
+    }
+})
 module.exports = router;
